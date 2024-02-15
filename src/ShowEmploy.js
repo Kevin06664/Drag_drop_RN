@@ -24,7 +24,7 @@ const ShowEmploy = ({navigation}) => {
             padding: 4,
           }}>
           <Image
-            source={{uri: 'https://picsum.photos/200/300'}}
+            source={{uri: item.image}}
             style={{width: 200, height: 150, borderRadius: 10}}
           />
           <Text style={styles.textshow}>
