@@ -8,13 +8,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Dropdown} from 'react-native-element-dropdown';
 import {useDispatch, useSelector} from 'react-redux';
 import {addEmploy} from '../Redux/Slice/employSlice';
 import {nanoid} from '@reduxjs/toolkit';
 
-const AddEmploy = ({navigation}) => {
+const AddEmploy = ({ navigation }) => {
+  
   const dispatch = useDispatch();
   const datass = useSelector(state => state.employ.employ);
   const [firstname, setfirstname] = useState('');
@@ -23,6 +24,7 @@ const AddEmploy = ({navigation}) => {
   const [employ, setemploy] = useState('');
   const [phonenumber, setphonenumber] = useState('');
   const [department_select, setdepartment] = useState('');
+  const [currentime, setcurrentime] = useState('');
   const data = [
     {label: 'Seniour', value: 'Seniour'},
     {label: 'Juniour', value: 'Juniour'},
@@ -32,7 +34,9 @@ const AddEmploy = ({navigation}) => {
     {label: 'Designer', value: 'Designer'},
     {label: 'Mobile-Developer', value: 'Mobile-Developer'},
   ];
-const currentime = Math.round(Math.random() * 1000) 
+  useEffect(() => {
+    setcurrentime(Math.round(Math.random() * 1000))
+  },[])
   const handleAdd = () => {
     if (
       firstname &&
@@ -50,6 +54,7 @@ const currentime = Math.round(Math.random() * 1000)
         phonenumber: phonenumber,
         employ: employ,
         department_select: department_select,
+        image:`https://picsum.photos/${currentime}`
       };
       dispatch(addEmploy(oneEmploy));
       console.log(oneEmploy);
